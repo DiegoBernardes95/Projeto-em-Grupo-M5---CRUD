@@ -1,0 +1,16 @@
+<head>
+    
+</head>
+
+<div class="editInfos">
+    <h2>Editar informações de {{infos.nome}}</h2>
+    <form action="/updatecurso" method="post">
+        <input type="text" name="id" value="{{infos.id}}">
+        <input type="text" name="nome" value="{{infos.nome}}">
+        <input type="text" name="modulos" value="{{infos.modulos}}">
+        <input type="text" name="turmas" value="{{infos.qtd_de_turmas}}">
+        <input type="text" name="cargaHoraria" value="{{infos.carga_horaria}}">
+        <textarea name="descricao" cols="30" rows="10">{{infos.descricao}}</textarea>
+        <input type="submit">
+    </form>
+</div>
