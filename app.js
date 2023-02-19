@@ -107,6 +107,8 @@ app.get('/remove/:id', (req, res) => {
     })
 })
 
+
+
 // Busca um curso através do seu id
 app.get('/buscar', (req, res) => {
     res.render('buscar', {layout: false});
@@ -128,7 +130,7 @@ app.post('/buscar/', (req, res) => {
 const conn = mysql.createConnection({
     host: '127.0.0.1',
     database: 'crud_api',
-    port: '3307',
+    port: '3306',    // <<< MUDAR DE ACORDO COM A SUA PORTA DO SERVIDOR 
     password: '',
     user: 'root'
 })
@@ -140,3 +142,102 @@ app.listen(port, (err) => {
     }
     console.log(`Servidor conectado na porta ${port}`);
 })
+
+// >>>>>>>>>>>>CRUD PROFESSORES<<<<<<<<<<<<<<<< 
+
+// Mostra a página para cadastro de professores
+app.get('/professor', (req, res) => {
+    res.render('postProf', { layout: false });
+});
+
+// Mostra a página com a lista de todos os professores cadastrados
+app.get('/professores', (req, res) => {
+    const sql = `SELECT * FROM professor`;
+
+    conn.query(sql, (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        const listarProf = data;
+        res.render('getProfessor', {layout: false, listarProf});
+        //getProfessor <<handlebars
+    })
+});
+
+// Mostra os dados de um professor específico
+app.get('/professor/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM professor WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getProfID', {layout: false, listar} ); //getProfessorID <<handlebars
+    })
+})
+
+// Mostra os dados de um professor específico para renderizar nos values dos input para editar os dados
+app.get('/professor/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM professor WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const infos = data[0];
+        res.render('updateProf', {layout: false, infos}) //updateProf<<handlebars
+    })
+});
+
+
+// Cadastra um Professor no database
+app.post('/cadastrarProf', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const matricula = req.body. matricula;
+    const telefone = req.body.telefone ;
+    const endereco = req.body.endereco;
+    const sql = `INSERT INTO professor(nome, matricula, telefone, endereco) VALUES('${nome}', ${ matricula}, '${telefone}', '${endereco}')`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/professores');
+    })
+});
+// Atualiza os dados de um professor
+app.post('/updateprofessor', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const matricula = req.body. matricula;
+    const telefone = req.body.telefone ;
+    const endereco = req.body.endereco;
+    const sql = `UPDATE professor SET nome = '${nome}', matricula = ${matricula}, telefone = '${telefone}', endereco = '${endereco}' WHERE id = ${id}`;
+
+   
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/professor');
+    })
+});
+
+// Remove um professor do database
+app.get('/removeprofessor/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM professor WHERE id = ${id}`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/professores');
+    })
+});
+
