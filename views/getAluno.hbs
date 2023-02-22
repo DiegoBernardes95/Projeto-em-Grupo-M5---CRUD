@@ -1,0 +1,31 @@
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="infoHeader">
+        <h1>Nossos Alunos</h1>
+        
+    </header>
+    <div class="btnCad">
+        <button><a href="/cadaluno">Cadastro</a></button>
+    </div>
+    <div class="infoCursos">
+        {{#each listarAlunos}}
+        <div>
+            <h2>#{{id}} {{nome}}</h2>
+            <a class="linkInfos" href="/alunos/{{this.id}}">
+                <ul>
+                    <li><strong>Nome:</strong> {{nome}}</li>
+                    <li><strong>Turma:</strong> {{turma}}</li>
+                    <li><strong>Média:</strong> {{media}}</li>
+                    <li><strong>Telefone:</strong> {{telefone}}</li>
+                </ul>
+                <button><a href="/aluno/edit/{{this.id}}">Editar</a></button>
+                <button><a href="/removeralunos/{{this.id}}">Excluir</a></button>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    
+</body>

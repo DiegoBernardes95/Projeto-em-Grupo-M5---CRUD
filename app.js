@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.engine('hbs', exphbs.engine());
 app.set('view engine', 'hbs');
 
+// >>>>>>>>>>>>CRUD CURSO<<<<<<<<<<<<<<<< 
+
 // Mostra a página para cadastro de cursos
 app.get('/', (req, res) => {
     res.render('post', { layout: false });
@@ -66,7 +68,7 @@ app.post('/cadastrar', (req, res) => {
     const turmas = req.body.turmas;
     const cargaHoraria = req.body.cargaHoraria;
     const descricao = req.body.descricao;
-    const sql = `INSERT INTO curso(nome, modulos, qtd_de_turmas, carga_horaria, descricao) VALUES('${nome}', ${modulos}, ${turmas}, '${cargaHoraria}', '${descricao}')`;
+    const sql = `INSERT INTO curso(nome, modulos, turmas, cargaHoraria, descricao) VALUES('${nome}', ${modulos}, ${turmas}, '${cargaHoraria}', '${descricao}')`;
 
     conn.query(sql, (err) => {
         if(err){
@@ -84,7 +86,7 @@ app.post('/updatecurso', (req, res) => {
     const turmas = req.body.turmas;
     const cargaHoraria = req.body.cargaHoraria;
     const descricao = req.body.descricao;
-    const sql = `UPDATE curso SET nome = '${nome}', modulos = ${modulos}, qtd_de_turmas = ${turmas}, carga_horaria = '${cargaHoraria}', descricao = '${descricao}' WHERE id = ${id}`;
+    const sql = `UPDATE curso SET nome = '${nome}', modulos = ${modulos}, turmas = ${turmas}, cargaHoraria = '${cargaHoraria}', descricao = '${descricao}' WHERE id = ${id}`;
 
     conn.query(sql, (err) => {
         if(err){
@@ -124,23 +126,6 @@ app.post('/buscar/', (req, res) => {
         const listar = data[0];
         res.render('getCursosId', {layout: false, listar});
     })
-})
-
-// Cria a conexão com o database
-const conn = mysql.createConnection({
-    host: '127.0.0.1',
-    database: 'crud_api',
-    port: '3306',    // <<< MUDAR DE ACORDO COM A SUA PORTA DO SERVIDOR 
-    password: '',
-    user: 'root'
-})
-
-// Cria uma porta para o servidor
-app.listen(port, (err) => {
-    if(err){
-        console.log(err);
-    }
-    console.log(`Servidor conectado na porta ${port}`);
 })
 
 // >>>>>>>>>>>>CRUD PROFESSORES<<<<<<<<<<<<<<<< 
@@ -197,10 +182,10 @@ app.get('/professor/edit/:id', (req, res) => {
 app.post('/cadastrarProf', (req, res) => {
     const id = req.body.id;
     const nome = req.body.nome;
-    const matricula = req.body. matricula;
+    const matricula = req.body.matricula;
     const telefone = req.body.telefone ;
     const endereco = req.body.endereco;
-    const sql = `INSERT INTO professor(nome, matricula, telefone, endereco) VALUES('${nome}', ${ matricula}, '${telefone}', '${endereco}')`;
+    const sql = `INSERT INTO professor(nome, matricula, telefone, endereco) VALUES('${nome}', '${ matricula}', '${telefone}', '${endereco}')`;
 
     conn.query(sql, (err) => {
         if(err){
@@ -241,3 +226,117 @@ app.get('/removeprofessor/:id', (req, res) => {
     })
 });
 
+// >>>>>>>>>>>>CRUD ALUNO<<<<<<<<<<<<<<<< 
+
+// Rota da pagina Cadastro de alunos
+app.get('/cadaluno', (req, res) => {
+    res.render('postAluno', { layout: false} );
+});
+
+// Cadastrar alunos
+app.post('/cdalnpost', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const turma = req.body.turma;
+    const media = req.body.media;
+    const telefone = req.body.telefone;
+    const sql = `INSERT INTO aluno (nome, turma, media, telefone) VALUES ('${nome}', '${turma}', '${media}','${telefone}')`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/cadaluno');
+    })
+});
+
+//ver lista de alunos
+app.get('/aluno', (req, res) => {
+    const sql = `SELECT * FROM aluno`;
+
+    conn.query(sql, (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        const listarAlunos = data;
+        res.render('getAluno', {layout: false, listarAlunos});
+    })
+});
+
+// Mostra os dados de um aluno específico
+app.get('/alunos/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM aluno WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getAlunosID', {layout: false, listar} );
+    })
+});
+
+
+// Mostra os dados de um aluno específico para renderizar nos values dos input para editar os dados
+app.get('/alunos/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM aluno WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const infos = data[0];
+        res.render('updateAluno', {layout: false, infos})
+    })
+});
+
+// Atualiza os dados de um aluno
+app.post('/updatealuno', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const turma = req.body.turma;
+    const media = req.body.media
+    const telefone = req.body.telefone;
+    const sql = `UPDATE aluno SET nome = '${nome}', turma = ${turma}, media = '${media}', telefone = '${telefone}' WHERE id = ${id}`;
+
+   
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/aluno');
+    })
+});
+
+// Remove um professor do database
+app.get('/removeralunos/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM aluno WHERE id = ${id}`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/aluno');
+    })
+});
+
+// Cria a conexão com o database
+const conn = mysql.createConnection({
+    host: '127.0.0.1',
+    database: 'crud_api',
+    port: '3306',    // <<< MUDAR DE ACORDO COM A SUA PORTA DO SERVIDOR 
+    password: '',
+    user: 'root'
+})
+
+// Cria uma porta para o servidor
+app.listen(port, (err) => {
+    if(err){
+        console.log(err);
+    }
+    console.log(`Servidor conectado na porta ${port}`);
+})
