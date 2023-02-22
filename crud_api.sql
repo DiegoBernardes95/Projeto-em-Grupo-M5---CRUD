@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Fev-2023 às 01:02
+-- Tempo de geração: 22-Fev-2023 às 02:50
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -73,8 +73,16 @@ INSERT INTO `curso` (`id`, `nome`, `modulos`, `turmas`, `cargaHoraria`, `descric
 CREATE TABLE `materia` (
   `id` int(11) NOT NULL,
   `nome` varchar(30) DEFAULT NULL,
-  `carga_horaria` varchar(10) DEFAULT NULL
+  `cargaHoraria` varchar(10) DEFAULT NULL,
+  `tempos` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `materia`
+--
+
+INSERT INTO `materia` (`id`, `nome`, `cargaHoraria`, `tempos`) VALUES
+(2, 'programação 2', '300', 5);
 
 -- --------------------------------------------------------
 
@@ -105,9 +113,9 @@ INSERT INTO `professor` (`id`, `nome`, `matricula`, `telefone`, `endereco`) VALU
 
 CREATE TABLE `turma` (
   `id` int(11) NOT NULL,
-  `qtd_de_alunos` int(11) DEFAULT NULL,
+  `alunos` int(11) DEFAULT NULL,
   `turno` varchar(10) DEFAULT NULL,
-  `professor` varchar(50) NOT NULL
+  `professor` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -164,7 +172,7 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de tabela `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
