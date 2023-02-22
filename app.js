@@ -311,7 +311,7 @@ app.post('/updatealuno', (req, res) => {
     })
 });
 
-// Remove um professor do database
+// Remove um aluno do database
 app.get('/removeralunos/:id', (req, res) => {
     const id = req.params.id;
     const sql = `DELETE FROM aluno WHERE id = ${id}`;
@@ -321,6 +321,102 @@ app.get('/removeralunos/:id', (req, res) => {
             console.log(err);
         }
         res.redirect('/aluno');
+    })
+});
+
+// >>>>>>>>>>>>CRUD MATÉRIA<<<<<<<<<<<<<<<< 
+
+// Rota da pagina Cadastro de materias
+app.get('/cadmateria', (req, res) => {
+    res.render('postMateria', { layout: false} );
+});
+
+// Cadastrar materias
+app.post('/cadmatpost', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const cargaHoraria = req.body.cargaHoraria;
+    const tempos = req.body.tempos;
+    const sql = `INSERT INTO materia (nome, cargaHoraria, tempos) VALUES ('${nome}', '${cargaHoraria}', '${tempos}')`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/cadmateria');
+    })
+});
+
+//ver lista de materias
+app.get('/materia', (req, res) => {
+    const sql = `SELECT * FROM materia`;
+
+    conn.query(sql, (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        const listarMaterias = data;
+        res.render('getMateria', {layout: false, listarMaterias});
+    })
+});
+
+// Mostra os dados de um aluno específico
+app.get('/materia/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM materia WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getMateriaID', {layout: false, listar} );
+    })
+});
+
+
+// Mostra os dados de uma materia específica para renderizar nos values dos input para editar os dados
+app.get('/materia/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM materia WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const infos = data[0];
+        res.render('updateMateria', {layout: false, infos})
+    })
+});
+
+// Atualiza os dados de uma materia
+app.post('/updatemat', (req, res) => {
+    const id = req.body.id;
+    const nome = req.body.nome;
+    const cargaHoraria = req.body.cargaHoraria;
+    const tempos = req.body.tempos;
+    const sql = `UPDATE materia SET nome = '${nome}', cargaHoraria = '${cargaHoraria}', tempos = '${tempos}' WHERE id = ${id}`;
+
+   
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/materia');
+    })
+});
+
+// Remove uma materia do database
+app.get('/removermateria/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM materia WHERE id = ${id}`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/materia');
     })
 });
 
