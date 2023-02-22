@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Fev-2023 às 20:38
+-- Tempo de geração: 22-Fev-2023 às 01:02
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `resilia_database`
+-- Banco de dados: `crud_api`
 --
 
 -- --------------------------------------------------------
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `aluno` (
   `id` int(11) NOT NULL,
-  `id_turma` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
-  `media_notas` float DEFAULT NULL,
+  `turma` int(11) DEFAULT NULL,
+  `media` float DEFAULT NULL,
   `telefone` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `aluno`
+--
+
+INSERT INTO `aluno` (`id`, `nome`, `turma`, `media`, `telefone`) VALUES
+(3, 'Antonio Juevan', 100, 9, '21965337473');
 
 -- --------------------------------------------------------
 
@@ -45,9 +52,17 @@ CREATE TABLE `curso` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
   `modulos` int(11) DEFAULT NULL,
-  `qtd_de_turmas` int(11) DEFAULT NULL,
-  `carga_horaria` varchar(10) DEFAULT NULL
+  `turmas` int(11) DEFAULT NULL,
+  `cargaHoraria` varchar(10) DEFAULT NULL,
+  `descricao` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `curso`
+--
+
+INSERT INTO `curso` (`id`, `nome`, `modulos`, `turmas`, `cargaHoraria`, `descricao`) VALUES
+(1, 'programação', 5, 5, '200', 'programação em php');
 
 -- --------------------------------------------------------
 
@@ -72,9 +87,15 @@ CREATE TABLE `professor` (
   `nome` varchar(20) DEFAULT NULL,
   `matricula` varchar(20) DEFAULT NULL,
   `telefone` varchar(20) DEFAULT NULL,
-  `endereco` varchar(70) DEFAULT NULL,
-  `id_turma` int(11) NOT NULL
+  `endereco` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `professor`
+--
+
+INSERT INTO `professor` (`id`, `nome`, `matricula`, `telefone`, `endereco`) VALUES
+(1, 'Diego', '2222', '21982445634', 'Rua Flor de Brilhantina');
 
 -- --------------------------------------------------------
 
@@ -131,13 +152,13 @@ ALTER TABLE `turma`
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `materia`
@@ -149,7 +170,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de tabela `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `turma`

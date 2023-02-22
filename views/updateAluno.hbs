@@ -1,0 +1,15 @@
+<head>
+    
+</head>
+
+<div class="editInfos">
+    <h2>Editar informações de {{infos.nome}}</h2>
+    <form action="/updatealuno" method="post">
+        <input type="text" name="id" value="{{infos.id}}">
+        <input type="text" name="nome" value="{{infos.nome}}">
+        <input type="text" name="turma" value="{{infos.turma}}">
+        <input type="text" name="media" value="{{infos.media}}">
+        <input type="text" name="telefone" value="{{infos.telefone}}">
+        <input type="submit">
+    </form>
+</div>
