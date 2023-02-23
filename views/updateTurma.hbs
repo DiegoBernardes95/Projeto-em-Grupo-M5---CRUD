@@ -1,0 +1,11 @@
+
+<div class="editInfos">
+    <h2>Editar informações de {{infos.nome}}</h2>
+    <form action="/updateTurma" method="post">
+        <input type="text" name="id" value="{{infos.id}}">
+        <input type="text" name="alunos" value="{{infos.alunos}}">
+        <input type="text" name="turno" value="{{infos.turno}}">
+        <input type="text" name="professor" value="{{infos.professor}}">
+        <input type="submit">
+    </form>
+</div>

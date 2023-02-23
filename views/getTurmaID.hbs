@@ -1,0 +1,15 @@
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<div>
+    <h1>#{{listar.id}} {{listar}}</h1>
+
+    <ul>
+        <li><strong>Quantidade de alunos:</strong> {{listar.alunos}}</li>
+        <li><strong>Turno:</strong> {{listar.turno}}</li>
+        <li><strong>Professor:</strong> {{listar.professor}}</li>
+    </ul>
+    <button><a href="/turma/edit/{{listar.id}}">Editar</a></button>
+    <button><a href="/turma">Voltar</a></button>
+</div>

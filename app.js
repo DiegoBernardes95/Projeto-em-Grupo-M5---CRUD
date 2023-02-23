@@ -420,11 +420,126 @@ app.get('/removermateria/:id', (req, res) => {
     })
 });
 
+
+// >>>>>>>>>>>>CRUD TURMA<<<<<<<<<<<<<<<< 
+
+// Mostra a página para cadastro de turmas
+app.get('/cadastroTurma', (req, res) => {
+    res.render('postTurma', {layout: false})
+})
+
+// Mostra a página com a lista de todos as turmas cadastradas
+app.get('/turma', (req, res) => {
+    const sql = `SELECT * FROM turma`;
+
+    conn.query(sql, (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        const listarTurmas = data;
+        res.render('getTurma', {layout: false, listarTurmas});
+    })
+})
+
+// Mostra os dados de uma turma específica
+app.get('/turma/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM turma WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getTurmaId', {layout: false, listar} );
+    })
+})
+
+// Mostra os dados de uma turma específica para renderizar nos values dos input para editar os dados
+app.get('/turma/edit/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `SELECT * FROM turma WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const infos = data[0];
+        res.render('updateTurma', {layout: false, infos})
+    })
+})
+
+// Cadastra uma turma no database
+app.post('/cadastrarTurma', (req, res) => {
+    const alunos = req.body.alunos;
+    const turno = req.body.turno;
+    const professor = req.body.professor;
+    const sql = `INSERT INTO turma(alunos, turno, professor) VALUES('${alunos}', '${turno}', '${professor}')`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/turma');
+    })
+})
+
+// Atualiza os dados de uma turma
+app.post('/updateTurma', (req, res) => {
+    const id = req.body.id;
+    const alunos = req.body.alunos;
+    const turno = req.body.turno;
+    const professor = req.body.professor;
+    const sql = `UPDATE turma SET alunos = '${alunos}', turno = '${turno}', professor = '${professor}' WHERE id = '${id}'`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/turma');
+    })
+})
+
+// Remove uma turma do database
+app.get('/removerTurma/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM turma WHERE id = '${id}'`;
+
+    conn.query(sql, (err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/turma');
+    })
+})
+
+
+
+// Busca uma turma através do seu id
+app.get('/buscar', (req, res) => {
+    res.render('buscar', {layout: false});
+})
+app.post('/buscar/', (req, res) => {
+    const id = req.body.id;
+    const sql = `SELECT * FROM turma WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if(err){
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getTurmaId', {layout: false, listar});
+    })
+})
+
+
+
+
 // Cria a conexão com o database
 const conn = mysql.createConnection({
     host: '127.0.0.1',
     database: 'crud_api',
-    port: '3306',    // <<< MUDAR DE ACORDO COM A SUA PORTA DO SERVIDOR 
+    port: '3307',    // <<< MUDAR DE ACORDO COM A SUA PORTA DO SERVIDOR 
     password: '',
     user: 'root'
 })
