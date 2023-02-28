@@ -17,9 +17,12 @@ app.set('view engine', 'hbs');
 
 // Mostra a página para cadastro de cursos
 app.get('/', (req, res) => {
-    res.render('post', { layout: false });
+    res.render('home', { layout: false });
 })
 
+app.get('/cadcursos', (req, res) => {
+    res.render('post', {layout: false})
+})
 // Mostra a página com a lista de todos os cursos cadastrados
 app.get('/cursos', (req, res) => {
     const sql = `SELECT * FROM curso`;

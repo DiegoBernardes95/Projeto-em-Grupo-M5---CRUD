@@ -76,3 +76,32 @@ body{
 .editInfos{
     background-color: red;
 }
+
+
+.rotas {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 12rem;
+    gap: 6rem;
+    color: #fff;
+  }
+  
+  .rotas ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    list-style: none;
+  }
+  .rotas ul li{
+    margin-bottom: 4rem;
+  }
+  .rotas ul a {
+    border: 2px solid #fff;
+    padding: 2rem;
+    background-color: #ffff;
+    text-decoration: none;
+    color: #030405;
+  }
+  
