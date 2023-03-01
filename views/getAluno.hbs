@@ -4,11 +4,13 @@
 
 <body>
     <header class="infoHeader">
-        <h1>Nossos Alunos</h1>
+        <h1>Alunos</h1>
+        <p>Os alunos de nossa unidade:</p>
         
     </header>
     <div class="btnCad">
-        <button><a href="/cadaluno">Cadastro</a></button>
+        <button><a href="/">Rotas</a></button>
+        <button><a href="/cadaluno">Cadastro de alunos</a></button>
     </div>
     <div class="infoCursos">
         {{#each listarAlunos}}
@@ -21,7 +23,7 @@
                     <li><strong>Média:</strong> {{media}}</li>
                     <li><strong>Telefone:</strong> {{telefone}}</li>
                 </ul>
-                <button><a href="/aluno/edit/{{this.id}}">Editar</a></button>
+                <button><a href="/alunos/edit/{{this.id}}">Editar</a></button>
                 <button><a href="/removeralunos/{{this.id}}">Excluir</a></button>
             </a>
         </div>

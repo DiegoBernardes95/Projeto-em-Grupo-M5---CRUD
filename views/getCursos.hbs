@@ -4,11 +4,12 @@
 
 <body>
     <header class="infoHeader">
-        <h1>Nossos Cursos</h1>
-        <p>A instituição de ensino FiqueRico oferece os melhores cursos na área de tecnologia.<br>Se capacite e construa sua carreira nesse mercado em constante expansão!</p>
+        <h1>Cursos</h1>
+        <p>Alguns dos cursos que nossa instituição oferece:</p>
     </header>
     <div class="btnCad">
-        <button><a href="/cadcursos">Cadastro</a></button>
+        <button><a href="/">Rotas</a></button>
+        <button><a href="/cadcursos">Cadastro de cursos</a></button>
         <button><a href="/buscar">Buscar</a></button>
     </div>
     <div class="infoCursos">
@@ -19,7 +20,7 @@
                 <ul>
                     <li><strong>Módulos:</strong> {{modulos}}</li>
                     <li><strong>Turmas:</strong> {{turmas}}</li>
-                    <li><strong>Carga-horária:</strong> {{cargHoraria}}</li>
+                    <li><strong>Carga-horária:</strong> {{cargaHoraria}}</li>
                     <li><strong>Descrição:</strong> {{descricao}}</li>
                 </ul>
                 <button><a href="/cursos/edit/{{this.id}}">Editar</a></button>

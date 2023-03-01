@@ -77,7 +77,7 @@ app.post('/cadastrar', (req, res) => {
         if(err){
             console.log(err);
         }
-        res.redirect('/');
+        res.redirect('/cursos');
     })
 })
 
@@ -201,7 +201,7 @@ app.post('/cadastrarProf', (req, res) => {
 app.post('/updateprofessor', (req, res) => {
     const id = req.body.id;
     const nome = req.body.nome;
-    const matricula = req.body. matricula;
+    const matricula = req.body.matricula;
     const telefone = req.body.telefone ;
     const endereco = req.body.endereco;
     const sql = `UPDATE professor SET nome = '${nome}', matricula = ${matricula}, telefone = '${telefone}', endereco = '${endereco}' WHERE id = ${id}`;
@@ -212,7 +212,7 @@ app.post('/updateprofessor', (req, res) => {
         if(err){
             console.log(err);
         }
-        res.redirect('/professor');
+        res.redirect('/professores');
     })
 });
 
@@ -346,7 +346,7 @@ app.post('/cadmatpost', (req, res) => {
         if(err){
             console.log(err);
         }
-        res.redirect('/cadmateria');
+        res.redirect('/materia');
     })
 });
 
