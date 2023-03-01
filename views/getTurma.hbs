@@ -5,15 +5,17 @@
 <body>
     <header class="infoHeader">
         <h1>Turma</h1>
+        <p>Algumas de nossas turmas:</p>
         
     </header>
     <div class="btnCad">
-        <button><a href="/cadastroTurma">Cadastro</a></button>
+        <button><a href="/">Rotas</a></button>
+        <button><a href="/cadastroTurma">Cadastro de turma</a></button>
     </div>
     <div class="infoCursos">
         {{#each listarTurmas}}
         <div>
-            <h2>#{{id}}</h2>
+            <h2>Turma #{{id}}</h2>
             <a class="linkInfos" href="/turma/{{this.id}}">
                 <ul>
                     <li><strong>Quantidade de alunos:</strong> {{alunos}}</li>

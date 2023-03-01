@@ -4,11 +4,13 @@
 
 <body>
     <header class="infoHeader">
-        <h1>Nossas Materias</h1>
+        <h1>Matérias</h1>
+        <p>Algumas de nossas matérias:</p>
 
     </header>
     <div class="btnCad">
-        <button><a href="/cadmateria">Cadastro</a></button>
+        <button><a href="/">Rotas</a></button>
+        <button><a href="/cadmateria">Cadastro de matérias</a></button>
     </div>
     <div class="infoCursos">
         {{#each listarMaterias}}
@@ -17,8 +19,8 @@
             <a class="linkInfos" href="/materia/{{this.id}}">
                 <ul>
                     <li><strong>Nome:</strong> {{nome}}</li>
-                    <li><strong>Carga Horária:</strong> {{listar.cargaHoraria}}</li>
-                    <li><strong>Tempos:</strong> {{listar.tempos}}</li>
+                    <li><strong>Carga Horária:</strong> {{cargaHoraria}}</li>
+                    <li><strong>Tempos:</strong> {{tempos}}</li>
                 </ul>
                 <button><a href="/materia/edit/{{this.id}}">Editar</a></button>
                 <button><a href="/removermateria/{{this.id}}">Excluir</a></button>
