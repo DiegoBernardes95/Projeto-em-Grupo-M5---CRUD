@@ -152,6 +152,25 @@ app.get('/professores', (req, res) => {
     })
 });
 
+// Buscar professor pelo id
+
+app.get('/buscarprofessor', (req, res) => {
+    res.render('buscarProfessor', {layout: false});
+})
+
+app.post('/buscarprofessor/', (req, res) => {
+    const id = req.body.id;
+    const sql = `SELECT * FROM professor WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getProfID', {layout: false, listar} );
+    })
+})
+
 // Mostra os dados de um professor específico
 app.get('/professor/:id', (req, res) => {
     const id = req.params.id;
@@ -249,7 +268,7 @@ app.post('/cdalnpost', (req, res) => {
         if(err){
             console.log(err);
         }
-        res.redirect('/cadaluno');
+        res.redirect('/aluno');
     })
 });
 
@@ -263,6 +282,25 @@ app.get('/aluno', (req, res) => {
         }
         const listarAlunos = data;
         res.render('getAluno', {layout: false, listarAlunos});
+    })
+});
+
+// Buscar aluno pelo id
+
+app.get('/buscaraluno', (req, res) => {
+    res.render('buscarAluno', {layout: false})
+})
+
+app.post('/buscaraluno/', (req, res) => {
+    const id = req.body.id;
+    const sql = `SELECT * FROM aluno WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getAlunosID', {layout: false, listar} );
     })
 });
 
@@ -363,7 +401,26 @@ app.get('/materia', (req, res) => {
     })
 });
 
-// Mostra os dados de um aluno específico
+// Buscar uma matéria pelo id
+
+app.get('/buscarmateria', (req, res) => {
+    res.render('buscarMateria', {layout: false});
+})
+
+app.post('/buscarmateria/', (req, res) => {
+    const id = req.body.id;
+    const sql = `SELECT * FROM materia WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getMateriaID', {layout: false, listar} );
+    })
+});
+
+// Mostra os dados de uma matéria específica
 app.get('/materia/:id', (req, res) => {
     const id = req.params.id;
     const sql = `SELECT * FROM materia WHERE id = ${id}`;
@@ -399,8 +456,6 @@ app.post('/updatemat', (req, res) => {
     const cargaHoraria = req.body.cargaHoraria;
     const tempos = req.body.tempos;
     const sql = `UPDATE materia SET nome = '${nome}', cargaHoraria = '${cargaHoraria}', tempos = '${tempos}' WHERE id = ${id}`;
-
-   
 
     conn.query(sql, (err) => {
         if(err){
@@ -441,6 +496,25 @@ app.get('/turma', (req, res) => {
         }
         const listarTurmas = data;
         res.render('getTurma', {layout: false, listarTurmas});
+    })
+})
+
+// Buscar uma turma pelo id
+
+app.get('/buscarturma', (req, res) => {
+    res.render('buscarTurma', {layout: false})
+})
+
+app.post('/buscarturma/', (req, res) => {
+    const id = req.body.id;
+    const sql = `SELECT * FROM turma WHERE id = ${id}`;
+
+    conn.query(sql, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        const listar = data[0];
+        res.render('getTurmaId', {layout: false, listar} );
     })
 })
 
