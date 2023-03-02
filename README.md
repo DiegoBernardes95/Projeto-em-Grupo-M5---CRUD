@@ -14,7 +14,7 @@
 
 <h2>⚙️ Funcionalidades</h2>
 
-<p>É possível utilizar os métodos de requisição <kbd>GET</kbd>, <kbd>POST</kbd>, <kbd>PUT</kbd> e <kbd>DELETE</kbd> em todas as rotas da API. Para acessar uma das rotas, basta iniciar o servidor e inserir no URL - após a declaração da porta - uma das opções abaixo: <kbd>/cursos</kbd>, <kbd>/professor</kbd>, <kbd>/aluno</kbd>, <kbd>/materia</kbd> e <kbd>/turmas</kbd>.</p>
+<p>É possível utilizar os métodos de requisição <kbd>GET</kbd>, <kbd>POST</kbd>, <kbd>PUT</kbd> e <kbd>DELETE</kbd> em todas as rotas da API. Para acessar uma das rotas, basta iniciar o servidor e inserir no URL - após a declaração da porta - uma das opções abaixo: <kbd>/cursos</kbd>, <kbd>/professores</kbd>, <kbd>/aluno</kbd>, <kbd>/materia</kbd> e <kbd>/turma</kbd>.</p>
 
 <h2>🚀 Execução do Projeto</h2>
 
@@ -34,14 +34,14 @@ cd Projeto-em-Grupo-M5---CRUD
 # Instalar as dependências do projeto
 npm install
 ```
-* Importe o arquivo do banco de dados - <kbd>crud_api.sql</kbd> - para um SGBD (<em>Sistema de Gerenciamento de Banco de Dados</em>), como o <strong>MySQL Workbench</strong> ou pelo phpMyAdmin do <strong>XAMPP</strong>. OBS.: Se atente a porta de conexão com o banco de dados. A porta configurada é a 3306.
+* Importe o arquivo do banco de dados - <kbd>crud_api.sql</kbd> - para um SGBD (<em>Sistema de Gerenciamento de Banco de Dados</em>), como o <strong>MySQL Workbench</strong> ou pelo phpMyAdmin do <strong>XAMPP</strong>. OBS.: Se atente a porta de conexão com o banco de dados. A porta configurada é a 3307.
 
 * Inicie o servidor com o comando:
 
 ```cmd
 npm start
 ```
-* Teste os métodos da API através do localhost do servidor + alguma das rotas ou utilize ferramentas para realizar testes em APIs, como o <strong>Insomnia</strong>.
+* Teste os métodos da API através do localhost do servidor ou utilize ferramentas para realizar testes em APIs, como o <strong>Insomnia</strong>.
 
 <h2>🛠 Tecnologias</h2>
 
